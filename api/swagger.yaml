@@ -378,6 +378,7 @@ paths:
     get:
       tags:
       - admins
+      - service
       summary: check card
       operationId: isValid
       description: |
