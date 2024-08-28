@@ -28,7 +28,7 @@ tags:
 #Response Body: { "class": The Newly-Created Class }
 #Success Response Code: 201
 
-#Read (All Classes)
+#Read (All Classes) > List
 #Route: GET /classes
 #Effect on Database: None
 #Response Body: { "classes": [ Array of All Saved Classess ] }

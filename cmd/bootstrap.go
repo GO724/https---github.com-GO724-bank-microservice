@@ -4,7 +4,7 @@ package bootstrap
 
 type Bootstrapper struct {
 	// Вложенность как в пакетах
-	conltroller
+	conltroller *controller
 	database
 }
 

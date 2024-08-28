@@ -2,8 +2,9 @@ package database
 
 type Bank interface {
 	CreateTable() (err error)
-	CreateBank(b Bank) (err error)
-	ReadBank(bic uint) (outb Bank, err error)
-	UpdateBank(b Bank) (err error)
-	DeleteBank(bic uint) (err error)
+	Create(b Bank) (err error)
+	Read(bic uint) (outb Bank, err error)
+	List(b Bank) (outb []Bank, err error)
+	Update(b Bank) (err error)
+	Delete(bic uint) (err error)
 }
