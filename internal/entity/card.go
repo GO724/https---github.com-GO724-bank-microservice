@@ -5,13 +5,12 @@ import (
 )
 
 type Card struct {
-	id      uint
-	person  Person
-	bank    Bank
-	expires time.Time // UTC
+	Id      uint
+	Person  Person
+	Bank    Bank
+	Expires time.Time // UTC
 }
 
-func (c Card) isValid() (result bool) {
-	result = c.expires.Before(time.Now().UTC())
-	return result
+func (c Card) IsValid() bool {
+	return c.Expires.Before(time.Now().UTC())
 }

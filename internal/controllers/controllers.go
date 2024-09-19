@@ -2,18 +2,28 @@ package controllers
 
 import (
 	db "bank-microservice/internal/database"
+	pg "bank-microservice/internal/database/dbEngine/postgres"
+	"context"
+	"log"
 )
 
 type controller struct {
-	Bank   db.Bank
-	Person db.Person
-	Card   db.Card
+	bank   db.Bank
+	person db.Person
+	card   db.Card
 }
 
 func New() (Controller *controller) {
+	ctx := context.Background()
+
+	b, err := pg.NewBank(ctx)
+	if err != nil {
+		log.Fatalln("can't init obj.bank")
+	}
+
 	return &controller{
-		Bank:   db.Bank,
-		Person: db.Person,
-		Card:   db.Card,
+		bank:   b,
+		person: nil,
+		card:   nil,
 	}
 }

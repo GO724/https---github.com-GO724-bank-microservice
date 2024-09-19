@@ -1,10 +1,12 @@
 package database
 
+import "bank-microservice/internal/entity"
+
 type Person interface {
-	CreateTable() (err error)
-	Create(p Person) (err error)
-	Read(inn uint) (p Person, err error)
-	List(p Person) (outp []Person, err error)
-	Update(p Person) (err error)
-	Delete(inn uint) (err error)
+	Migrate() error                                // Create table & fill demo record
+	Create(p entity.Person) error                  // New record
+	Read(inn uint) (entity.Person, error)          // Read record
+	List(p entity.Person) ([]entity.Person, error) // List of record filtered on p(Person)
+	Update(p entity.Person) error                  // Update record
+	Delete(inn uint) error                         // Delete record
 }

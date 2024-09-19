@@ -1,6 +1,6 @@
 package entity
 
 type Bank struct {
-	bic  uint
-	name string
+	Bic  uint
+	Name string
 }

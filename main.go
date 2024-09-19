@@ -29,11 +29,30 @@
 
 package main
 
+import (
+	pg "bank-microservice/internal/database/dbEngine/postgres"
+	"context"
+	"fmt"
+	"log"
+)
+
 func main() {
 
 	// развертывание сервиса:
 	// инициализация БД : чтение параметров БД из конфига (если открытие БД == nil тогда создание новой БД и дефолтного конфига?)
 
 	// cmd/bootstrap
+	ctx := context.Background()
+	db, err := pg.NewPG(ctx)
+	if err != nil {
+		log.Fatalln("error connect pg %w", err)
+	}
 
+	checkMsg := "check health postgree connect : "
+	err = db.Ping(ctx)
+	if err != nil {
+		fmt.Println(checkMsg + "FAILED")
+	} else {
+		fmt.Println(checkMsg + "ok")
+	}
 }
