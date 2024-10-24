@@ -1,0 +1,472 @@
+swagger: '2.0'
+info:
+  description: |+
+    Sample OpenAPI2.0 spec for demo microservice bcard:
+    Check valid paycard (exist & not expiried)
+    CRUD Card, Person, Bank & check valid
+
+  version: 1.0.0
+  title: bcard_microservice_api
+  # put the contact info for your development or API team
+  contact:
+    email: nba.linx@gmail.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: service
+  description: Service data access
+
+#New
+#Route: POST /classes
+#Effect on Database: Adds the class provided in the request body to the database
+#Response Body: { "class": The Newly-Created Class }
+#Success Response Code: 201
+
+#List (All Classes) > List
+#Route: GET /classes
+#Effect on Database: None
+#Response Body: { "classes": [ Array of All Saved Classess ] }
+#Success Response Code: 200
+
+#Get (One Class)
+#Route: GET /classes/:id
+#Effect on Database: None
+#Response Body: { "class": The class with the specified ID }
+#Success Response Code: 200
+
+#Set
+#Route: PUT /classes/:id
+#Effect on Database: Updates the class with the specified ID to have the class information provided in the request body
+#Response Body: { "class": The updated class now saved in the database }
+#Success Response Code: 200
+
+#Delete
+#Route: DELETE /classes/:id
+#Effect on Database: Removes the class with the specified ID from the database
+#Response Body: None
+#Success Response Code: 204
+
+paths:
+  /persons:
+    post:  #New
+      tags:
+      - admins
+      summary: adds new person item
+      operationId: newPerson
+      description: Adds new person to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: Person
+        description: inn&name to add person 
+        schema:
+          $ref: '#/definitions/Person'
+      responses:
+        201:
+          description: person created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: conflict - person already exists
+
+    get:  #(List)
+      tags:
+      - admins
+      summary: searches persons
+      #operationid: listOfPersons
+      description: |
+        By passing in the appropriate options, you can search for
+        persons in the system
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: searchString
+        description: pass an optional search string for looking up person
+        required: false
+        type: string
+      - in: query
+        name: skip
+        description: number of records to skip for pagination
+        type: integer
+        format: int32
+        minimum: 0
+      - in: query
+        name: limit
+        description: maximum number of records to return
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 50
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Person'
+        400:
+          description: bad input parameter
+
+  /persons/{inn}:  #(Get, Delete)        
+    get:      #(Get)
+      tags:
+      - admins
+      summary: get person by inn
+      operationId: getPerson
+      description: Gets person by inn
+      produces:
+      - application/json
+      parameters:
+      - name: inn
+        type: integer
+        in: path
+        required: true
+        description: inn to get person
+      responses:
+        200:
+          description: person found
+        400:
+          description: invalid input, object invalid
+        404:
+          description: person not exists
+
+    delete:   #(Delete)
+      tags:
+      - admins
+      summary: remove person by inn
+      operationId: delPerson
+      description: Remove person by inn
+      produces:
+      - application/json
+      parameters:
+      - name: inn
+        type: integer
+        in: path
+        required: true
+        description: inn to remove person 
+      responses:
+        204:
+          description: person deleted
+        400:
+          description: invalid input, object invalid
+        404:
+          description: person not exists
+        409:
+          description: conflict - can't delete person
+
+  /banks:
+    post:  #New
+      tags:
+      - admins
+      summary: adds an bank item
+      operationId: newBank
+      description: Adds new bank to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: bank
+        description: bank to add
+        schema:
+          $ref: '#/definitions/Bank'
+      responses:
+        201:
+          description: new bank created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: conflict - bank already exists
+
+    get:  #(List all selected)
+      tags:
+      - admins
+      summary: searches banks
+      description: |
+        By passing in the appropriate options, you can search for
+        banks in the system
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: searchString
+        description: pass an optional search string for looking up bank
+        required: false
+        type: string
+      - in: query
+        name: skip
+        description: number of records to skip for pagination
+        type: integer
+        format: int32
+        minimum: 0
+      - in: query
+        name: limit
+        description: maximum number of records to return
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 50
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Bank'
+        400:
+          description: bad input parameter
+
+  /banks/{inn}:  #(Get, Delete)        
+    get:      #(Get)
+      tags:
+      - admins
+      summary: get bank by bic
+      operationId: getBank
+      description: Gets bank by bic
+      produces:
+      - application/json
+      parameters:
+      - name: inn
+        type: integer
+        in: path
+        required: true
+        description: get bank by bic
+      responses:
+        200:
+          description: bank found
+        400:
+          description: invalid input, object invalid
+        404:
+          description: bank not exists
+    delete:   #(Delete)
+      tags:
+      - admins
+      summary: remove bank by bic
+      operationId: delBank
+      description: Remove bank by bic
+      produces:
+      - application/json
+      parameters:
+      - name: inn
+        type: integer
+        in: path
+        required: true
+        description: bic to remove bank
+      responses:
+        204:
+          description: bank deleted
+        400:
+          description: invalid input, object invalid
+        404:
+          description: bank not exists
+        409:
+          description: conflict - can't delete bank
+          
+  /cards:
+    post:  #New
+      tags:
+      - admins
+      summary: adds new card item
+      operationId: addCard
+      description: Adds new card to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: card
+        description: card to add
+        schema:
+          $ref: '#/definitions/Card'
+      responses:
+        201:
+          description: card created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: conflict - card already exists
+
+    get:  #(Get all selected)
+      tags:
+      - admins
+      summary: searches cards
+      description: |
+        By passing in the appropriate options, you can search for
+        cards in the system
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: searchString
+        description: pass an optional search string for looking up card
+        required: false
+        type: string
+      - in: query
+        name: skip
+        description: number of records to skip for pagination
+        type: integer
+        format: int32
+        minimum: 0
+      - in: query
+        name: limit
+        description: maximum number of records to return
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 50
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Card'
+        400:
+          description: bad input parameter
+
+  /cards/{inn}:  #(Get, Delete)        
+    get:      #(Get)
+      tags:
+      - admins
+      summary: get card by id
+      operationId: getCard
+      description: Get card by id
+      produces:
+      - application/json
+      parameters:
+      - name: inn
+        type: integer
+        in: path
+        required: true
+        description: get card by id
+      responses:
+        200:
+          description: card found
+        400:
+          description: invalid input, object invalid
+        404:
+          description: card not exists
+    delete:   #(Delete)
+      tags:
+      - admins
+      summary: remove an card item
+      operationId: delСard
+      description: Remove an card from the system
+      produces:
+      - application/json
+      parameters:
+      - name: inn
+        type: integer
+        in: path
+        required: true
+        description: card to remove
+      responses:
+        204:
+          description: card deleted
+        400:
+          description: invalid input, object invalid
+        404:
+          description: card not exists
+        409:
+          description: conflict - can't delete card
+
+  /card/validator/{id}:
+    get:
+      tags:
+      - admins
+      - service
+      summary: check valid card (exist&expires)
+      operationId: isValid
+      description: |
+        Check card status: if card.exists & card.Expires>now() & valid = true
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        type: integer
+        in: path
+        required: true
+        description: get card status
+      responses:
+        200:
+          description: card is valid
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Card'
+        400:
+          description: bad input parameter
+        412:
+          description: card is invalid
+          
+definitions:
+  Person:
+    type: object
+    required:
+    - inn
+    - name
+    properties:
+      inn:
+        type: integer
+        format: uint64
+        example: 123456789012
+      name:
+        type: string
+        example: John Smith
+    description: Sample person model
+  Bank:
+    type: object
+    required:
+    - bic
+    - name
+    properties:
+      bic:
+        type: integer
+        format: uint32
+        example: 123456789
+      name:
+        type: string
+        example: Bank of Albania
+    description: Sample bank model
+  Card:
+    type: object
+    required:
+    - id
+    - bic
+    - name
+    - expires
+    properties:
+      id:
+        type: integer
+        format: uint64
+        example: 1234123412341234
+      bic:
+        type: integer
+        format: uint32
+        example: 123456789
+      name:
+        type: string
+        example: Bank of Albania
+      expires:
+        type: string
+        format: date-time
+        example: '2016-08-29T09:12:33.001Z'
+    description: Sample card model
+  
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /go9130416421/bcard/1.0.0
+schemes:
+ - https
