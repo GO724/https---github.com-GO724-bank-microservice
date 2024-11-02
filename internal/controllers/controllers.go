@@ -8,9 +8,9 @@ import (
 
 type controller struct {
 	// контроллер знает только о сервисах!
-	bank   bank.Bank
-	person person.Person
-	card   card.Card
+	bank   bank.BankRepo
+	person person.PersonRepo
+	card   card.CardRepo
 }
 
 func New() (Controller *controller) {

@@ -1,18 +1,11 @@
 package bank
 
 import (
-	"bank-microservice/internal/entity"
 	"bank-microservice/internal/infrastructure/database"
-	"context"
+	"fmt"
 )
 
 type Bank interface {
-	New(ctx context.Context, b entity.Bank) error                   // New record
-	Get(ctx context.Context, bic uint) (entity.Bank, error)         // Read record
-	Set(ctx context.Context, b entity.Bank) error                   // Update record
-	List(ctx context.Context, b entity.Bank) ([]entity.Bank, error) // List of record filtered on b(Bank)
-	Delete(ctx context.Context, bic uint) error                     // Delete record
-	Migrate(ctx context.Context) error                              // Create table & fill demo record
 }
 
 type bankRepository struct {
@@ -20,6 +13,7 @@ type bankRepository struct {
 }
 
 func NewRepository(db *database.Database) *bankRepository {
+	fmt.Println("new bank repository")
 	return &bankRepository{
 		db: db,
 	}

@@ -35,7 +35,7 @@ func NewIsValid(ctx *middleware.Context, handler IsValidHandler) *IsValid {
 }
 
 /*
-	IsValid swagger:route GET /card/validator/{id} admins service isValid
+	IsValid swagger:route GET /cards/validator/{id} admins service isValid
 
 check valid card (exist&expires)
 

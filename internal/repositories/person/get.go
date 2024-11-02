@@ -20,5 +20,5 @@ func (p personRepository) Get(ctx context.Context, inn uint) (entity.Person, err
 	//	bank.Bic = bic
 	//	bank.Name = name
 	//	return bank, err
-	return entity.Person{Inn: '0', Name: "0"}, nil
+	return entity.Person{Inn: 456, Name: "testPersonName"}, nil
 }

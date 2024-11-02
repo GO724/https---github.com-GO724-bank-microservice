@@ -14,7 +14,7 @@ import (
 	"bank-microservice/internal/infrastructure/http/httpserver/swaggerapi/admins"
 )
 
-//go:generate swagger generate server --target ../../http --name BcardMicroserviceAPI --spec ../../../../data/api/bcard-microservice-swagger.yaml --api-package ./swaggerapi --model-package ./httpserver/swaggerapi/models --server-package ./httpserver --principal interface{} --exclude-main
+//go:generate swagger generate server --target ../../http --name BcardMicroserviceAPI --spec ../../../../data/api/bcard-microservice-swagger.yaml --api-package ./swaggerapi --model-package ./httpserver/swaggerapi/models --server-package ./httpserver --principal interface{}
 
 func configureFlags(api *swaggerapi.BcardMicroserviceAPIAPI) {
 	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }

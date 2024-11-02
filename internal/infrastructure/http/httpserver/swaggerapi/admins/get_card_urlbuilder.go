@@ -16,7 +16,7 @@ import (
 
 // GetCardURL generates an URL for the get card operation
 type GetCardURL struct {
-	Inn int64
+	ID int64
 
 	_basePath string
 	// avoid unkeyed usage
@@ -42,18 +42,18 @@ func (o *GetCardURL) SetBasePath(bp string) {
 func (o *GetCardURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/cards/{inn}"
+	var _path = "/cards/{id}"
 
-	inn := swag.FormatInt64(o.Inn)
-	if inn != "" {
-		_path = strings.Replace(_path, "{inn}", inn, -1)
+	id := swag.FormatInt64(o.ID)
+	if id != "" {
+		_path = strings.Replace(_path, "{id}", id, -1)
 	} else {
-		return nil, errors.New("inn is required on GetCardURL")
+		return nil, errors.New("id is required on GetCardURL")
 	}
 
 	_basePath := o._basePath
 	if _basePath == "" {
-		_basePath = "/go9130416421/bcard/1.0.0"
+		_basePath = "/v1"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 

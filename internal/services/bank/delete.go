@@ -2,6 +2,7 @@ package bank
 
 import (
 	"context"
+	"fmt"
 )
 
 func (b *bankService) Delete(ctx context.Context, bic uint) error {
@@ -32,5 +33,6 @@ func (b *bankService) Delete(ctx context.Context, bic uint) error {
 	// }
 
 	// return b.bankRepo.Delete(ctx, bic)
+	fmt.Println("service: delete bank.bic[%d]", bic)
 	return nil
 }

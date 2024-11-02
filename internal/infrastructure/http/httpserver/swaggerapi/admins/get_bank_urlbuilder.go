@@ -16,7 +16,7 @@ import (
 
 // GetBankURL generates an URL for the get bank operation
 type GetBankURL struct {
-	Inn int64
+	Bic int64
 
 	_basePath string
 	// avoid unkeyed usage
@@ -42,18 +42,18 @@ func (o *GetBankURL) SetBasePath(bp string) {
 func (o *GetBankURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/banks/{inn}"
+	var _path = "/banks/{bic}"
 
-	inn := swag.FormatInt64(o.Inn)
-	if inn != "" {
-		_path = strings.Replace(_path, "{inn}", inn, -1)
+	bic := swag.FormatInt64(o.Bic)
+	if bic != "" {
+		_path = strings.Replace(_path, "{bic}", bic, -1)
 	} else {
-		return nil, errors.New("inn is required on GetBankURL")
+		return nil, errors.New("bic is required on GetBankURL")
 	}
 
 	_basePath := o._basePath
 	if _basePath == "" {
-		_basePath = "/go9130416421/bcard/1.0.0"
+		_basePath = "/v1"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 

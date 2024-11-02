@@ -3,6 +3,7 @@ package card
 import (
 	"bank-microservice/internal/entity"
 	"context"
+	"fmt"
 )
 
 func (c cardRepository) Set(ctx context.Context, card entity.Card) error {
@@ -14,5 +15,6 @@ func (c cardRepository) Set(ctx context.Context, card entity.Card) error {
 	//		fmt.Fprintf(os.Stderr, "update bank.bic[%v].name[%v] : %v rows updated\n", bank.Bic, bank.Name, res.RowsAffected())
 	//	}
 	//	return err
+	fmt.Println("service: set card[%v]\n", card)
 	return nil
 }

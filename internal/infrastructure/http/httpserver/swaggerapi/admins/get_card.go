@@ -30,7 +30,7 @@ func NewGetCard(ctx *middleware.Context, handler GetCardHandler) *GetCard {
 }
 
 /*
-	GetCard swagger:route GET /cards/{inn} admins getCard
+	GetCard swagger:route GET /cards/{id} admins getCard
 
 get card by id
 

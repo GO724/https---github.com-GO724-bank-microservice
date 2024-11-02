@@ -3,6 +3,7 @@ package card
 import (
 	"bank-microservice/internal/entity"
 	"context"
+	"fmt"
 )
 
 func (c cardRepository) New(ctx context.Context, card entity.Card) error {
@@ -14,5 +15,6 @@ func (c cardRepository) New(ctx context.Context, card entity.Card) error {
 	// 	fmt.Fprintf(os.Stderr, "create card[%v]\n", card)
 	// }
 	// return err
+	fmt.Println("service: new card[%v]\n", card)
 	return nil
 }

@@ -3,6 +3,7 @@ package card
 import (
 	"bank-microservice/internal/entity"
 	"context"
+	"fmt"
 	"time"
 )
 
@@ -21,5 +22,6 @@ func (c cardRepository) Get(ctx context.Context, id uint) (entity.Card, error) {
 	//	bank.Bic = bic
 	//	bank.Name = name
 	//	return bank, err
-	return entity.Card{Id: '0', Person: entity.Person{Inn: '0', Name: "0"}, Bank: entity.Bank{Bic: '0', Name: "0"}, Expires: time.Now()}, nil
+	fmt.Println("service: get card.id[%d]\n", id)
+	return entity.Card{Id: 123, Person: entity.Person{Inn: 456, Name: "testPersonName"}, Bank: entity.Bank{Bic: 789, Name: "nestBankName"}, Expires: time.Now()}, nil
 }

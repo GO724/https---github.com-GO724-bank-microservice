@@ -4,21 +4,21 @@ package repositories
 
 import (
 	"bank-microservice/internal/infrastructure/database"
-	"bank-microservice/internal/repositories/bank"
-	"bank-microservice/internal/repositories/card"
-	"bank-microservice/internal/repositories/person"
+	repoBank "bank-microservice/internal/repositories/bank"
+	repoCard "bank-microservice/internal/repositories/card"
+	repoPerson "bank-microservice/internal/repositories/person"
 )
 
-type Repositories struct {
-	Card   card.Card
-	Bank   bank.Bank
-	Person person.Person
+type Repositories struct { // collection of repositories
+	Card   repoCard.Card
+	Bank   repoBank.Bank
+	Person repoPerson.Person
 }
 
-func NewRepository(db *database.Database) Repositories {
-	return Repositories{
-		Card:   card.NewRepository(db),
-		Bank:   bank.NewRepository(db),
-		Person: person.NewRepository(db),
+func NewRepository(db *database.Database) *Repositories {
+	return &Repositories{
+		Card:   repoCard.NewRepository(db),
+		Bank:   repoBank.NewRepository(db),
+		Person: repoPerson.NewRepository(db),
 	}
 }

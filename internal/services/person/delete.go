@@ -1,6 +1,8 @@
 package person
 
-func (p *personService) Delete(bic uint) error {
+import "context"
+
+func (p *personService) Delete(ctx context.Context, inn uint) error {
 	//b.personRepo.Get()
 	// if err
 	/// some logic

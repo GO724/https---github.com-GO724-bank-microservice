@@ -372,7 +372,7 @@ func (o *BcardMicroserviceAPIAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
-	o.handlers["DELETE"]["/banks/{inn}"] = admins.NewDelBank(o.context, o.AdminsDelBankHandler)
+	o.handlers["DELETE"]["/banks/{bic}"] = admins.NewDelBank(o.context, o.AdminsDelBankHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -380,15 +380,15 @@ func (o *BcardMicroserviceAPIAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
-	o.handlers["DELETE"]["/cards/{inn}"] = admins.NewDelСard(o.context, o.AdminsDelСardHandler)
+	o.handlers["DELETE"]["/cards/{id}"] = admins.NewDelСard(o.context, o.AdminsDelСardHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/banks/{inn}"] = admins.NewGetBank(o.context, o.AdminsGetBankHandler)
+	o.handlers["GET"]["/banks/{bic}"] = admins.NewGetBank(o.context, o.AdminsGetBankHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/cards/{inn}"] = admins.NewGetCard(o.context, o.AdminsGetCardHandler)
+	o.handlers["GET"]["/cards/{id}"] = admins.NewGetCard(o.context, o.AdminsGetCardHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -396,7 +396,7 @@ func (o *BcardMicroserviceAPIAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/card/validator/{id}"] = admins.NewIsValid(o.context, o.AdminsIsValidHandler)
+	o.handlers["GET"]["/cards/validator/{id}"] = admins.NewIsValid(o.context, o.AdminsIsValidHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

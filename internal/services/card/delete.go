@@ -1,6 +1,8 @@
 package card
 
-func (c *cardService) Delete(bic uint) error {
+import "context"
+
+func (c *cardService) Delete(ctx context.Context, id uint) error {
 	//b.personRepo.Get()
 	// if err
 	/// some logic

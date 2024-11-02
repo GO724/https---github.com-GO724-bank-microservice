@@ -35,7 +35,7 @@ type DelBankParams struct {
 	  Required: true
 	  In: path
 	*/
-	Inn int64
+	Bic int64
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -47,8 +47,8 @@ func (o *DelBankParams) BindRequest(r *http.Request, route *middleware.MatchedRo
 
 	o.HTTPRequest = r
 
-	rInn, rhkInn, _ := route.Params.GetOK("inn")
-	if err := o.bindInn(rInn, rhkInn, route.Formats); err != nil {
+	rBic, rhkBic, _ := route.Params.GetOK("bic")
+	if err := o.bindBic(rBic, rhkBic, route.Formats); err != nil {
 		res = append(res, err)
 	}
 	if len(res) > 0 {
@@ -57,8 +57,8 @@ func (o *DelBankParams) BindRequest(r *http.Request, route *middleware.MatchedRo
 	return nil
 }
 
-// bindInn binds and validates parameter Inn from path.
-func (o *DelBankParams) bindInn(rawData []string, hasKey bool, formats strfmt.Registry) error {
+// bindBic binds and validates parameter Bic from path.
+func (o *DelBankParams) bindBic(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]
@@ -69,9 +69,9 @@ func (o *DelBankParams) bindInn(rawData []string, hasKey bool, formats strfmt.Re
 
 	value, err := swag.ConvertInt64(raw)
 	if err != nil {
-		return errors.InvalidType("inn", "path", "int64", raw)
+		return errors.InvalidType("bic", "path", "int64", raw)
 	}
-	o.Inn = value
+	o.Bic = value
 
 	return nil
 }

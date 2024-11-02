@@ -1,0 +1,1 @@
+swagger validate data/api/bcard-microservice-swagger.yaml

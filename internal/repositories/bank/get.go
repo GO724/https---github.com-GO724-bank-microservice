@@ -3,6 +3,7 @@ package bank
 import (
 	"bank-microservice/internal/entity"
 	"context"
+	"fmt"
 )
 
 func (b bankRepository) Get(ctx context.Context, bic uint) (entity.Bank, error) {
@@ -20,5 +21,6 @@ func (b bankRepository) Get(ctx context.Context, bic uint) (entity.Bank, error) 
 	//	bank.Bic = bic
 	//	bank.Name = name
 	//	return bank, err
-	return entity.Bank{Bic: 0, Name: "0"}, nil
+	fmt.Println("service: get bank.bic[%d]\n", bic)
+	return entity.Bank{Bic: 789, Name: "testBankName"}, nil
 }

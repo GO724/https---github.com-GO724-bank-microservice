@@ -19,7 +19,7 @@ var (
 func init() {
 	SwaggerJSON = json.RawMessage([]byte(`{
   "schemes": [
-    "https"
+    "http"
   ],
   "swagger": "2.0",
   "info": {
@@ -34,8 +34,7 @@ func init() {
     },
     "version": "1.0.0"
   },
-  "host": "virtserver.swaggerhub.com",
-  "basePath": "/go9130416421/bcard/1.0.0",
+  "basePath": "/v1",
   "paths": {
     "/banks": {
       "get": {
@@ -153,7 +152,7 @@ func init() {
         }
       }
     },
-    "/banks/{inn}": {
+    "/banks/{bic}": {
       "get": {
         "description": "Gets bank by bic",
         "produces": [
@@ -168,7 +167,7 @@ func init() {
           {
             "type": "integer",
             "description": "get bank by bic",
-            "name": "inn",
+            "name": "bic",
             "in": "path",
             "required": true
           }
@@ -199,7 +198,7 @@ func init() {
           {
             "type": "integer",
             "description": "bic to remove bank",
-            "name": "inn",
+            "name": "bic",
             "in": "path",
             "required": true
           }
@@ -216,74 +215,6 @@ func init() {
           },
           "409": {
             "description": "conflict - can't delete bank"
-          }
-        }
-      }
-    },
-    "/card/validator/{id}": {
-      "get": {
-        "description": "Check card status: if card.exists \u0026 card.Expires\u003enow() \u0026 valid = true\n",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "admins",
-          "service"
-        ],
-        "summary": "check valid card (exist\u0026expires)",
-        "operationId": "isValid",
-        "parameters": [
-          {
-            "type": "integer",
-            "description": "get card status",
-            "name": "id",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "card is valid",
-            "schema": {
-              "type": "array",
-              "items": {
-                "description": "Sample card model",
-                "type": "object",
-                "required": [
-                  "id",
-                  "bic",
-                  "name",
-                  "expires"
-                ],
-                "properties": {
-                  "bic": {
-                    "type": "integer",
-                    "format": "uint32",
-                    "example": 123456789
-                  },
-                  "expires": {
-                    "type": "string",
-                    "format": "date-time",
-                    "example": "2016-08-29T09:12:33.001Z"
-                  },
-                  "id": {
-                    "type": "integer",
-                    "format": "uint64",
-                    "example": 1234123412341234
-                  },
-                  "name": {
-                    "type": "string",
-                    "example": "Bank of Albania"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "bad input parameter"
-          },
-          "412": {
-            "description": "card is invalid"
           }
         }
       }
@@ -428,7 +359,75 @@ func init() {
         }
       }
     },
-    "/cards/{inn}": {
+    "/cards/validator/{id}": {
+      "get": {
+        "description": "Check card status: if card.exists \u0026 card.Expires\u003enow() \u0026 valid = true\n",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "admins",
+          "service"
+        ],
+        "summary": "check valid card (exist\u0026expires)",
+        "operationId": "isValid",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "get card status",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "card is valid",
+            "schema": {
+              "type": "array",
+              "items": {
+                "description": "Sample card model",
+                "type": "object",
+                "required": [
+                  "id",
+                  "bic",
+                  "name",
+                  "expires"
+                ],
+                "properties": {
+                  "bic": {
+                    "type": "integer",
+                    "format": "uint32",
+                    "example": 123456789
+                  },
+                  "expires": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2016-08-29T09:12:33.001Z"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "format": "uint64",
+                    "example": 1234123412341234
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Bank of Albania"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          },
+          "412": {
+            "description": "card is invalid"
+          }
+        }
+      }
+    },
+    "/cards/{id}": {
       "get": {
         "description": "Get card by id",
         "produces": [
@@ -443,7 +442,7 @@ func init() {
           {
             "type": "integer",
             "description": "get card by id",
-            "name": "inn",
+            "name": "id",
             "in": "path",
             "required": true
           }
@@ -474,7 +473,7 @@ func init() {
           {
             "type": "integer",
             "description": "card to remove",
-            "name": "inn",
+            "name": "id",
             "in": "path",
             "required": true
           }
@@ -763,7 +762,7 @@ func init() {
 }`))
 	FlatSwaggerJSON = json.RawMessage([]byte(`{
   "schemes": [
-    "https"
+    "http"
   ],
   "swagger": "2.0",
   "info": {
@@ -778,8 +777,7 @@ func init() {
     },
     "version": "1.0.0"
   },
-  "host": "virtserver.swaggerhub.com",
-  "basePath": "/go9130416421/bcard/1.0.0",
+  "basePath": "/v1",
   "paths": {
     "/banks": {
       "get": {
@@ -883,7 +881,7 @@ func init() {
         }
       }
     },
-    "/banks/{inn}": {
+    "/banks/{bic}": {
       "get": {
         "description": "Gets bank by bic",
         "produces": [
@@ -898,7 +896,7 @@ func init() {
           {
             "type": "integer",
             "description": "get bank by bic",
-            "name": "inn",
+            "name": "bic",
             "in": "path",
             "required": true
           }
@@ -929,7 +927,7 @@ func init() {
           {
             "type": "integer",
             "description": "bic to remove bank",
-            "name": "inn",
+            "name": "bic",
             "in": "path",
             "required": true
           }
@@ -946,46 +944,6 @@ func init() {
           },
           "409": {
             "description": "conflict - can't delete bank"
-          }
-        }
-      }
-    },
-    "/card/validator/{id}": {
-      "get": {
-        "description": "Check card status: if card.exists \u0026 card.Expires\u003enow() \u0026 valid = true\n",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "admins",
-          "service"
-        ],
-        "summary": "check valid card (exist\u0026expires)",
-        "operationId": "isValid",
-        "parameters": [
-          {
-            "type": "integer",
-            "description": "get card status",
-            "name": "id",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "card is valid",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/IsValidOKBodyItems0"
-              }
-            }
-          },
-          "400": {
-            "description": "bad input parameter"
-          },
-          "412": {
-            "description": "card is invalid"
           }
         }
       }
@@ -1104,7 +1062,47 @@ func init() {
         }
       }
     },
-    "/cards/{inn}": {
+    "/cards/validator/{id}": {
+      "get": {
+        "description": "Check card status: if card.exists \u0026 card.Expires\u003enow() \u0026 valid = true\n",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "admins",
+          "service"
+        ],
+        "summary": "check valid card (exist\u0026expires)",
+        "operationId": "isValid",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "get card status",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "card is valid",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IsValidOKBodyItems0"
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          },
+          "412": {
+            "description": "card is invalid"
+          }
+        }
+      }
+    },
+    "/cards/{id}": {
       "get": {
         "description": "Get card by id",
         "produces": [
@@ -1119,7 +1117,7 @@ func init() {
           {
             "type": "integer",
             "description": "get card by id",
-            "name": "inn",
+            "name": "id",
             "in": "path",
             "required": true
           }
@@ -1150,7 +1148,7 @@ func init() {
           {
             "type": "integer",
             "description": "card to remove",
-            "name": "inn",
+            "name": "id",
             "in": "path",
             "required": true
           }

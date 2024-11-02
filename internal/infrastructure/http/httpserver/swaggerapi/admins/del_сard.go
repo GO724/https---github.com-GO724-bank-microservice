@@ -30,7 +30,7 @@ func NewDelСard(ctx *middleware.Context, handler DelСardHandler) *DelСard {
 }
 
 /*
-	DelСard swagger:route DELETE /cards/{inn} admins delСard
+	DelСard swagger:route DELETE /cards/{id} admins delСard
 
 remove an card item
 

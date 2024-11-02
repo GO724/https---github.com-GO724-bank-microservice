@@ -3,6 +3,7 @@ package person
 import (
 	"bank-microservice/internal/entity"
 	"context"
+	"fmt"
 )
 
 func (p personRepository) Set(ctx context.Context, person entity.Person) error {
@@ -14,5 +15,6 @@ func (p personRepository) Set(ctx context.Context, person entity.Person) error {
 	//		fmt.Fprintf(os.Stderr, "update bank.bic[%v].name[%v] : %v rows updated\n", bank.Bic, bank.Name, res.RowsAffected())
 	//	}
 	//	return err
+	fmt.Println("service: set person[%v]\n", person)
 	return nil
 }

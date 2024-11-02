@@ -78,7 +78,7 @@ paths:
         409:
           description: conflict - person already exists
 
-    get:  #(List)
+    get:  #(Get list)
       tags:
       - admins
       summary: searches persons
@@ -118,7 +118,7 @@ paths:
           description: bad input parameter
 
   /persons/{inn}:  #(Get, Delete)        
-    get:      #(Get)
+    get:      #(Get single)
       tags:
       - admins
       summary: get person by inn
@@ -189,7 +189,7 @@ paths:
         409:
           description: conflict - bank already exists
 
-    get:  #(List all selected)
+    get:  #(Get list)
       tags:
       - admins
       summary: searches banks
@@ -227,8 +227,8 @@ paths:
         400:
           description: bad input parameter
 
-  /banks/{inn}:  #(Get, Delete)        
-    get:      #(Get)
+  /banks/{bic}:  #(Get, Delete)        
+    get:      #(Get single)
       tags:
       - admins
       summary: get bank by bic
@@ -237,7 +237,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: inn
+      - name: bic
         type: integer
         in: path
         required: true
@@ -258,7 +258,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: inn
+      - name: bic
         type: integer
         in: path
         required: true
@@ -298,7 +298,7 @@ paths:
         409:
           description: conflict - card already exists
 
-    get:  #(Get all selected)
+    get:  #(Get list)
       tags:
       - admins
       summary: searches cards
@@ -336,8 +336,8 @@ paths:
         400:
           description: bad input parameter
 
-  /cards/{inn}:  #(Get, Delete)        
-    get:      #(Get)
+  /cards/{id}:  #(Get, Delete)        
+    get:      #(Get single)
       tags:
       - admins
       summary: get card by id
@@ -346,7 +346,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: inn
+      - name: id
         type: integer
         in: path
         required: true
@@ -367,7 +367,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: inn
+      - name: id
         type: integer
         in: path
         required: true
@@ -382,7 +382,7 @@ paths:
         409:
           description: conflict - can't delete card
 
-  /card/validator/{id}:
+  /cards/validator/{id}:
     get:
       tags:
       - admins
@@ -466,7 +466,7 @@ definitions:
     description: Sample card model
   
 # Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
-basePath: /go9130416421/bcard/1.0.0
+# host: virtserver.swaggerhub.com
+basePath: /v1
 schemes:
- - https
+ - http

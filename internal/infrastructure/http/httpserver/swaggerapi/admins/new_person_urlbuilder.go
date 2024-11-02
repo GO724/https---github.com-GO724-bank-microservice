@@ -39,7 +39,7 @@ func (o *NewPersonURL) Build() (*url.URL, error) {
 
 	_basePath := o._basePath
 	if _basePath == "" {
-		_basePath = "/go9130416421/bcard/1.0.0"
+		_basePath = "/v1"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 

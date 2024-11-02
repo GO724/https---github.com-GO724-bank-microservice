@@ -30,7 +30,7 @@ func NewGetBank(ctx *middleware.Context, handler GetBankHandler) *GetBank {
 }
 
 /*
-	GetBank swagger:route GET /banks/{inn} admins getBank
+	GetBank swagger:route GET /banks/{bic} admins getBank
 
 get bank by bic
 

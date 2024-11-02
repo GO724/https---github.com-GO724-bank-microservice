@@ -2,9 +2,10 @@ package person
 
 import (
 	"context"
+	"fmt"
 )
 
-func (p *personRepository) Delete(ctx context.Context, inn uint) error {
+func (p personRepository) Delete(ctx context.Context, inn uint) error {
 	// // Delete record
 	// err := p.db.ExecSql(ctx, fmt.Sprintf("DELETE FROM person WHERE inn=%d", inn))
 	// if err != nil {
@@ -13,5 +14,6 @@ func (p *personRepository) Delete(ctx context.Context, inn uint) error {
 	// 	fmt.Fprintf(os.Stderr, "delete person.inn[%d]\n", inn)
 	// }
 	// return err
+	fmt.Println("service: delete person.inn[%d]", inn)
 	return nil
 }

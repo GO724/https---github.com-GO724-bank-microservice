@@ -30,7 +30,7 @@ func NewDelBank(ctx *middleware.Context, handler DelBankHandler) *DelBank {
 }
 
 /*
-	DelBank swagger:route DELETE /banks/{inn} admins delBank
+	DelBank swagger:route DELETE /banks/{bic} admins delBank
 
 remove bank by bic
 

@@ -42,7 +42,7 @@ func (o *IsValidURL) SetBasePath(bp string) {
 func (o *IsValidURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/card/validator/{id}"
+	var _path = "/cards/validator/{id}"
 
 	id := swag.FormatInt64(o.ID)
 	if id != "" {
@@ -53,7 +53,7 @@ func (o *IsValidURL) Build() (*url.URL, error) {
 
 	_basePath := o._basePath
 	if _basePath == "" {
-		_basePath = "/go9130416421/bcard/1.0.0"
+		_basePath = "/v1"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 

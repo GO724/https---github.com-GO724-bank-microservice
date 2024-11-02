@@ -8,9 +8,9 @@
 //
 //
 //	Schemes:
-//	  https
-//	Host: virtserver.swaggerhub.com
-//	BasePath: /go9130416421/bcard/1.0.0
+//	  http
+//	Host: localhost
+//	BasePath: /v1
 //	Version: 1.0.0
 //	License: Apache 2.0 http://www.apache.org/licenses/LICENSE-2.0.html
 //	Contact: <nba.linx@gmail.com>
